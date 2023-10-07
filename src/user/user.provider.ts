@@ -1,4 +1,4 @@
-import { Constants } from "src/constants";
+import { Constants } from "../constants";
 import { User } from "./entities/user.entity";
 import { UserSequelizeRepository } from "./repositories/user-sequelize.repository";
 import { UserBaseRepository } from "./repositories/user-base.repository";

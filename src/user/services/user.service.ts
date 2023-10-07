@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { CreateUserDTO } from "../dtos/user.dto";
-import { DatabaseService } from "src/database/database.service";
+import { DatabaseService } from "../../database/database.service";
 import { UserBaseRepository } from "../repositories/user-base.repository";
-import { UserAlreadyExists } from "src/exceptions/exceptions";
-import { CheckingAccountService } from "src/checking-account/services/checking-account.service";
+import { UserAlreadyExists } from "../../exceptions";
+import { CheckingAccountService } from "../../checking-account/services/checking-account.service";
 
 @Injectable()
 export class UserService {
@@ -45,5 +45,9 @@ export class UserService {
       await transaction.rollback();
       throw error;
     }
+  }
+
+  async getUserByCpf(cpf: string) {
+    return await this.userRepository.findUserByCpf(cpf);
   }
 }

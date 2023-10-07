@@ -1,4 +1,4 @@
-import { InvalidCPF, RequiredInput } from "src/exceptions/exceptions";
+import { InvalidCPF, RequiredInput } from "../../exceptions";
 
 export class CreateUserDTO {
   readonly name: string;

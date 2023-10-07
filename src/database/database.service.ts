@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Sequelize } from "sequelize-typescript";
-import { Constants } from "src/constants";
+import { Constants } from "../constants";
 import { Transaction } from "./transaction";
 
 @Injectable()

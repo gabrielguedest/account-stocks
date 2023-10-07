@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { CreateUserParams, UserBaseRepository } from "./user-base.repository";
 import { Transaction } from "../../database/transaction";
-import { Constants } from "src/constants";
+import { Constants } from "../../constants";
 import { User } from "../entities/user.entity";
 import { UserModel } from "../models/user.model";
 
@@ -26,6 +26,7 @@ export class UserSequelizeRepository implements UserBaseRepository {
       name: user.name,
       cpf: user.cpf,
       password: user.password,
+      salt: user.salt,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }
@@ -42,6 +43,7 @@ export class UserSequelizeRepository implements UserBaseRepository {
       name: user.name,
       cpf: user.cpf,
       password: user.password,
+      salt: user.salt,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }

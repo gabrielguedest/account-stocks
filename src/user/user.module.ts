@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { userProviders } from "./user.provider";
 import { UserService } from "./services/user.service";
-import { DatabaseModule } from "src/database/database.module";
+import { DatabaseModule } from "../database/database.module";
 import { UserSequelizeRepository } from "./repositories/user-sequelize.repository";
-import { CheckingAccountModule } from "src/checking-account/checking-account.module";
+import { CheckingAccountModule } from "../checking-account/checking-account.module";
 
 @Module({
   imports: [
@@ -16,8 +16,6 @@ import { CheckingAccountModule } from "src/checking-account/checking-account.mod
     UserSequelizeRepository,
     ...userProviders,
   ],
-  exports: [
-    UserService,
-  ],
+  exports: [UserService],
 })
 export class UserModule {}

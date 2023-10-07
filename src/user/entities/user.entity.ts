@@ -20,4 +20,7 @@ export class User extends Model<User> {
 
   @Column(DataType.STRING)
   password: string;
+
+  @Column(DataType.STRING)
+  salt: string;
 }
