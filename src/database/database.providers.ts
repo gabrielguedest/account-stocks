@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize-typescript";
+import { Sequelize, SequelizeOptions } from "sequelize-typescript";
 import { Constants } from "../constants";
 
 export const databaseProviders = [
@@ -9,7 +9,14 @@ export const databaseProviders = [
 ]
 
 function getSequelize() {
-  const sequelize = new Sequelize({
+  const sequelize = new Sequelize(getConnectionConfig());
+  const fileExt = __dirname.includes('dist') ? 'js' : 'ts';
+  sequelize.addModels([`${__dirname}/../**/*.entity.${fileExt}`]);
+  return sequelize
+}
+
+export function getConnectionConfig(): SequelizeOptions {
+  return {
     dialect: 'postgres',
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
@@ -22,9 +29,5 @@ function getSequelize() {
     modelMatch: (filename, member) => {
       return filename.substring(0, filename.indexOf('.model')) === member.toLowerCase();
     }
-  });
-
-  const fileExt = __dirname.includes('dist') ? 'js' : 'ts';
-  sequelize.addModels([`${__dirname}/../**/*.entity.${fileExt}`]);
-  return sequelize
+  }
 }
