@@ -27,7 +27,7 @@ export function getConnectionConfig(): SequelizeOptions {
       // console.log('Sequelize query: ', query)
     },
     modelMatch: (filename, member) => {
-      return filename.substring(0, filename.indexOf('.model')) === member.toLowerCase();
+      return filename.substring(0, filename.indexOf('.entity')).replace('-', '') === member.toLowerCase();
     }
   }
 }
