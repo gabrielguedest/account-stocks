@@ -1,26 +1,21 @@
 import { Sequelize } from "sequelize-typescript";
-import { ConfigService } from "@nestjs/config";
 import { Constants } from "../constants";
-import { DatabaseConfig } from "src/config/database.config";
-import { Configs } from "src/config/configs.enum";
 
 export const databaseProviders = [
   {
     provide: Constants.Sequelize,
-    useValue: (configService: ConfigService) => getSequelize(configService),
-    inject: [ConfigService],
+    useValue: getSequelize(),
   }
 ]
 
-function getSequelize(configService: ConfigService) {
-  const dbConfig = configService.get<DatabaseConfig>(Configs.Database);
+function getSequelize() {
   const sequelize = new Sequelize({
     dialect: 'postgres',
-    host: dbConfig.host,
-    port: dbConfig.port,
-    username: dbConfig.username,
-    password: dbConfig.password,
-    database: dbConfig.database,
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DATABASE,
     logging: (query) => {
       // console.log('Sequelize query: ', query)
     },
