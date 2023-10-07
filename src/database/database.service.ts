@@ -12,6 +12,10 @@ export class DatabaseService {
 
   async transaction(): Promise<Transaction> {
     const transaction = await this.sequelize.transaction();
-    return new Transaction(transaction.commit, transaction.rollback, transaction);
+    return new Transaction(
+      () => transaction.commit(),
+      () => transaction.rollback(),
+      transaction,
+    );
   }
 }

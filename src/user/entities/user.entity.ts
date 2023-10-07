@@ -23,4 +23,7 @@ export class User extends Model<User> {
 
   @Column(DataType.STRING)
   salt: string;
+
+  @Column(DataType.STRING)
+  checkingAccount: string;
 }

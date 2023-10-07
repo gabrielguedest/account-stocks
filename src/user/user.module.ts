@@ -4,13 +4,14 @@ import { UserService } from "./services/user.service";
 import { DatabaseModule } from "../database/database.module";
 import { UserSequelizeRepository } from "./repositories/user-sequelize.repository";
 import { CheckingAccountModule } from "../checking-account/checking-account.module";
+import { UserController } from "./controllers/user.controller";
 
 @Module({
   imports: [
     DatabaseModule,
     CheckingAccountModule,
   ],
-  controllers: [],
+  controllers: [UserController],
   providers: [
     UserService,
     UserSequelizeRepository,

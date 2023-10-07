@@ -18,7 +18,7 @@ export class UserSequelizeRepository implements UserBaseRepository {
       cpf: params.cpf,
       password: params.password,
       salt: params.salt,
-      checkigAccount: params.checkingAccount,
+      checkingAccount: params.checkingAccount,
     }, { transaction: params.transaction?.raw });
 
     return {
@@ -37,6 +37,10 @@ export class UserSequelizeRepository implements UserBaseRepository {
       where: { cpf },
       transaction: transaction?.raw,
     })
+
+    if (!user) {
+      return null
+    }
 
     return {
       id: user.id,

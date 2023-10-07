@@ -4,6 +4,8 @@ import { DatabaseService } from "../../database/database.service";
 import { UserBaseRepository } from "../repositories/user-base.repository";
 import { UserAlreadyExists } from "../../exceptions";
 import { CheckingAccountService } from "../../checking-account/services/checking-account.service";
+import { hashPassword } from "../../utils";
+import { JwtAuthService } from "src/jwt-auth/jwt-auth.service";
 
 @Injectable()
 export class UserService {
@@ -11,6 +13,7 @@ export class UserService {
     private readonly userRepository: UserBaseRepository,
     private readonly databaseService: DatabaseService,
     private readonly checkingAccountService: CheckingAccountService,
+    private readonly jwtAuthService: JwtAuthService,
   ) {}
 
   async createUser(data: CreateUserDTO) {
@@ -22,24 +25,24 @@ export class UserService {
     const transaction = await this.databaseService.transaction();
     
     try {
-      const checkingAccount = await this.checkingAccountService.createNewCheckingAccount();
+      const checkingAccount = await this.checkingAccountService.createNewCheckingAccount(transaction);
+      const { pwdHash, salt } = await hashPassword(data.password);
+
       const user = await this.userRepository.createUser({
         name: data.name,
         cpf: data.cpf,
-        password: data.password,
-        salt: 'salt',
+        password: pwdHash,
+        salt: salt,
         checkingAccount: checkingAccount.code,
         transaction: transaction,
       });
 
+      const token = await this.jwtAuthService.generateToken(user);
+
       await transaction.commit();
 
       return {
-        name: data.name,
-        checkingAccount: {
-          code: checkingAccount.code,
-          balance: checkingAccount.balance,
-        },
+        acess_token: token,
       }
     } catch (error) {
       await transaction.rollback();
