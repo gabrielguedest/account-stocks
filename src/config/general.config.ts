@@ -6,7 +6,7 @@ export interface GeneralConfig {
   env: string
 }
 
-export default registerAs(Configs.GENERAL, () => ({
+export default registerAs(Configs.General, () => ({
   port: parseInt(process.env.PORT),
   env: process.env.NODE_ENV,
 }))

@@ -1,4 +1,4 @@
 export enum Configs {
-  GENERAL = 'general',
-  DATABASE = 'database',
+  General = 'general',
+  Database = 'database',
 }
