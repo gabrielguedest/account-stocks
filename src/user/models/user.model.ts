@@ -3,7 +3,8 @@ export interface UserModel {
   name: string;
   cpf: string;
   password: string;
-  salt: string,
+  salt: string;
+  checkingAccount: string;
   createdAt: Date;
   updatedAt: Date;
 }

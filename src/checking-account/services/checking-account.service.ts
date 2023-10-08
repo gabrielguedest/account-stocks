@@ -33,4 +33,8 @@ export class CheckingAccountService {
 
     return code;
   }
+  
+  async getCheckingAccount(code: string) {
+    return await this.checkingAccountRepository.getCheckingAccount(code);
+  }
 }

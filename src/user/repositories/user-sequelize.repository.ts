@@ -27,6 +27,7 @@ export class UserSequelizeRepository implements UserBaseRepository {
       cpf: user.cpf,
       password: user.password,
       salt: user.salt,
+      checkingAccount: user.checkingAccount,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }
@@ -48,6 +49,7 @@ export class UserSequelizeRepository implements UserBaseRepository {
       cpf: user.cpf,
       password: user.password,
       salt: user.salt,
+      checkingAccount: user.checkingAccount,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }

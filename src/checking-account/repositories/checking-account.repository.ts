@@ -30,4 +30,17 @@ export class CheckingAccountRepository {
 
     return checkingAccount === null;
   }
+
+  async getCheckingAccount(code: string): Promise<CheckingAccountModel> {
+    const checkingAccount = await this.checkingAccountRepository.findOne({
+      where: { code },
+    });
+
+    return {
+      code: checkingAccount.code,
+      balance: checkingAccount.balance,
+      createdAt: checkingAccount.createdAt,
+      updatedAt: checkingAccount.updatedAt,
+    }
+  }
 }
