@@ -1,5 +1,5 @@
 import { Column, DataType, Default, HasOne, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
-import { Stock } from "src/stocks/stock.entity";
+import { Stock } from "../stocks/stock.entity";
 
 @Table({
   tableName: 'user_stocks',

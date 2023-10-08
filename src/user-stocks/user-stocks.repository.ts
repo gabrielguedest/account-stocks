@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Constants } from 'src/constants';
 import { UserStock } from './user-stock.entity';
-import { Stock } from 'src/stocks/stock.entity';
+import { Stock } from '../stocks/stock.entity';
 
 @Injectable()
 export class UserStocksRepository {
