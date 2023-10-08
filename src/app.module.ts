@@ -5,6 +5,8 @@ import { CheckingAccountModule } from './checking-account/checking-account.modul
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthModule } from './jwt-auth/jwt-auth.module';
 import { UserPositionModule } from './user-position/user-position.module';
+import { StocksModule } from './stocks/stocks.module';
+import { UserStocksModule } from './user-stocks/user-stocks.module';
 
 @Module({
   imports: [
@@ -13,7 +15,10 @@ import { UserPositionModule } from './user-position/user-position.module';
     CheckingAccountModule,
     AuthModule,
     UserPositionModule,
+    StocksModule,
+    UserStocksModule,
   ],
   controllers: [AppController],
+  providers: [],
 })
 export class AppModule {}

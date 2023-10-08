@@ -1,9 +1,9 @@
 export class UserPositionResponseDTO {
   checkingAccountAmount: number;
-  positions: [{
+  positions: Array<{
     symbol: string;
     amount: number;
     currentPrice: number;
-  }?];
+  }>;
   consolidated: number;
 }
