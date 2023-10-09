@@ -17,3 +17,9 @@ export class UserAlreadyExists extends HttpException {
     super('Usuário já existe', HttpStatus.CONFLICT);
   }
 }
+
+export class InvalidStockAmount extends BadRequestException {
+  constructor() {
+    super('Quantidade de ações inválida');
+  }
+}

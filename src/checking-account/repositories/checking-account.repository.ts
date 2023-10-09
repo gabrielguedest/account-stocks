@@ -10,9 +10,9 @@ export class CheckingAccountRepository {
     private readonly checkingAccountRepository: typeof CheckingAccount,
   ) {}
 
-  async createCheckingAccount(code: string, transaction?: Transaction): Promise<CheckingAccountModel> {
+  async createCheckingAccount(accountCode: string, transaction?: Transaction): Promise<CheckingAccountModel> {
     const checkingAccount = await this.checkingAccountRepository.create({
-      code,
+      code: accountCode,
     }, { transaction: transaction?.raw });
 
     return {
@@ -23,17 +23,18 @@ export class CheckingAccountRepository {
     }
   }
 
-  async checkIfCodeIsAvailable(code: string): Promise<boolean> {
+  async checkIfCodeIsAvailable(accountCode: string): Promise<boolean> {
     const checkingAccount = await this.checkingAccountRepository.findOne({
-      where: { code },
+      where: { code: accountCode },
     });
 
     return checkingAccount === null;
   }
 
-  async getCheckingAccount(code: string): Promise<CheckingAccountModel> {
+  async getCheckingAccount(accountCode: string, transaction?: Transaction): Promise<CheckingAccountModel> {
     const checkingAccount = await this.checkingAccountRepository.findOne({
-      where: { code },
+      where: { code: accountCode },
+      transaction: transaction?.raw,
     });
 
     return {
@@ -42,5 +43,15 @@ export class CheckingAccountRepository {
       createdAt: checkingAccount.createdAt,
       updatedAt: checkingAccount.updatedAt,
     }
+  }
+
+  async updateBalance(accountCode: string, newBalance: number, transaction?: Transaction) {
+    await this.checkingAccountRepository.update({
+      balance: newBalance,
+    }, {
+      where: { code: accountCode },
+      transaction: transaction?.raw,
+      returning: true,
+    });
   }
 }

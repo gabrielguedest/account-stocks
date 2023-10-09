@@ -14,4 +14,12 @@ export class StocksRepository {
       limit: 5,
     });
   }
+
+  async findStockBySymbol(symbol: string) {
+    return await this.repository.findOne({
+      where: {
+        symbol,
+      },
+    });
+  }
 }

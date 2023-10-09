@@ -11,5 +11,6 @@ import { stocksProviders } from './stocks.providers';
     StocksRepository,
     ...stocksProviders,
   ],
+  exports: [StocksService]
 })
 export class StocksModule {}
