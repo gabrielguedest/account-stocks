@@ -1,7 +1,7 @@
-import { Constants } from "../constants";
-import { User } from "./entities/user.entity";
-import { UserSequelizeRepository } from "./repositories/user-sequelize.repository";
-import { UserBaseRepository } from "./repositories/user-base.repository";
+import { Constants } from '../constants';
+import { User } from './entities/user.entity';
+import { UserSequelizeRepository } from './repositories/user-sequelize.repository';
+import { UserBaseRepository } from './repositories/user-base.repository';
 
 export const userProviders = [
   {
@@ -11,5 +11,5 @@ export const userProviders = [
   {
     provide: UserBaseRepository,
     useClass: UserSequelizeRepository,
-  }
-]
+  },
+];

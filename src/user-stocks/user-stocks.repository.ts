@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Constants } from 'src/constants';
+import { Constants } from '../constants';
 import { UserStock } from './user-stock.entity';
 import { Stock } from '../stocks/stock.entity';
-import { Transaction } from 'src/database/transaction';
+import { Transaction } from '../database/transaction';
 
 @Injectable()
 export class UserStocksRepository {
@@ -20,7 +20,11 @@ export class UserStocksRepository {
     });
   }
 
-  async findUserStock(userId: string, stockId: string, transaction?: Transaction) {
+  async findUserStock(
+    userId: string,
+    stockId: string,
+    transaction?: Transaction,
+  ) {
     return await this.repository.findOne({
       where: {
         userId,
@@ -30,24 +34,39 @@ export class UserStocksRepository {
     });
   }
 
-  async updateStockAmount(userStockId: string, newAmount: number, transaction?: Transaction) {
-    return await this.repository.update({
-      amount: newAmount,
-    }, {
-      where: {
-        id: userStockId,
+  async updateStockAmount(
+    userStockId: string,
+    newAmount: number,
+    transaction?: Transaction,
+  ) {
+    return await this.repository.update(
+      {
+        amount: newAmount,
       },
-      transaction: transaction?.raw,
-    });
+      {
+        where: {
+          id: userStockId,
+        },
+        transaction: transaction?.raw,
+      },
+    );
   }
 
-  async createUserStock(userId: string, stockId: string, amount: number, transaction?: Transaction) {
-    return await this.repository.create({
-      userId,
-      stockId,
-      amount,
-    }, {
-      transaction: transaction?.raw,
-    });
+  async createUserStock(
+    userId: string,
+    stockId: string,
+    amount: number,
+    transaction?: Transaction,
+  ) {
+    return await this.repository.create(
+      {
+        userId,
+        stockId,
+        amount,
+      },
+      {
+        transaction: transaction?.raw,
+      },
+    );
   }
 }

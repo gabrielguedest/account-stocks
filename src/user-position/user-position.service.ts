@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CheckingAccountService } from 'src/checking-account/services/checking-account.service';
-import { UserService } from 'src/user/services/user.service';
+import { CheckingAccountService } from '../checking-account/services/checking-account.service';
+import { UserService } from '../user/services/user.service';
 import { UserPositionResponseDTO } from './user-position.dto';
-import { UserStocksService } from 'src/user-stocks/user-stocks.service';
+import { UserStocksService } from '../user-stocks/user-stocks.service';
 
 @Injectable()
 export class UserPositionService {
@@ -18,16 +18,19 @@ export class UserPositionService {
       throw new UnauthorizedException();
     }
 
-    const checkingAccount = await this.checkingAccountService.getCheckingAccount(user.checkingAccount);
+    const checkingAccount =
+      await this.checkingAccountService.getCheckingAccount(
+        user.checkingAccount,
+      );
     const userStocks = await this.userStocksService.getUserStocks(user.id);
 
     return {
       checkingAccountAmount: checkingAccount.balance / 100,
-      positions: userStocks.stocks.map(stock => ({
+      positions: userStocks.stocks.map((stock) => ({
         ...stock,
         currentPrice: stock.currentPrice / 100,
       })),
       consolidated: (checkingAccount.balance + userStocks.total) / 100,
-    }
+    };
   }
 }

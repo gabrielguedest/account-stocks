@@ -22,11 +22,11 @@ export class JwtAuthGuard implements CanActivate {
       const payload = await this.jwtAuthService.validateToken(token);
       request['user'] = {
         cpf: payload.sub,
-      }
+      };
     } catch {
       throw new UnauthorizedException();
     }
-    
+
     return true;
   }
 

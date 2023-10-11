@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { CreateUserDTO } from "../dtos/user.dto";
-import { DatabaseService } from "../../database/database.service";
-import { UserBaseRepository } from "../repositories/user-base.repository";
-import { UserAlreadyExists } from "../../exceptions";
-import { CheckingAccountService } from "../../checking-account/services/checking-account.service";
-import { hashPassword } from "../../utils";
-import { JwtAuthService } from "src/jwt-auth/jwt-auth.service";
+import { Injectable } from '@nestjs/common';
+import { CreateUserDTO } from '../dtos/user.dto';
+import { DatabaseService } from '../../database/database.service';
+import { UserBaseRepository } from '../repositories/user-base.repository';
+import { UserAlreadyExists } from '../../exceptions';
+import { CheckingAccountService } from '../../checking-account/services/checking-account.service';
+import { hashPassword } from '../../utils';
+import { JwtAuthService } from '../../jwt-auth/jwt-auth.service';
 
 @Injectable()
 export class UserService {
@@ -23,9 +23,10 @@ export class UserService {
     }
 
     const transaction = await this.databaseService.transaction();
-    
+
     try {
-      const checkingAccount = await this.checkingAccountService.createNewCheckingAccount(transaction);
+      const checkingAccount =
+        await this.checkingAccountService.createNewCheckingAccount(transaction);
       const { pwdHash, salt } = await hashPassword(data.password);
 
       const user = await this.userRepository.createUser({
@@ -43,7 +44,7 @@ export class UserService {
 
       return {
         acess_token: token,
-      }
+      };
     } catch (error) {
       await transaction.rollback();
       throw error;

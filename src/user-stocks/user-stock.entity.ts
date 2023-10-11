@@ -1,5 +1,14 @@
-import { Column, DataType, Default, HasOne, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
-import { Stock } from "../stocks/stock.entity";
+import {
+  Column,
+  DataType,
+  Default,
+  HasOne,
+  Model,
+  PrimaryKey,
+  Table,
+  Unique,
+} from 'sequelize-typescript';
+import { Stock } from '../stocks/stock.entity';
 
 @Table({
   tableName: 'user_stocks',

@@ -6,11 +6,7 @@ import { stocksProviders } from './stocks.providers';
 
 @Module({
   controllers: [StocksController],
-  providers: [
-    StocksService,
-    StocksRepository,
-    ...stocksProviders,
-  ],
-  exports: [StocksService]
+  providers: [StocksService, StocksRepository, ...stocksProviders],
+  exports: [StocksService],
 })
 export class StocksModule {}

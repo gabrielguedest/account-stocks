@@ -1,19 +1,19 @@
-import { Sequelize, SequelizeOptions } from "sequelize-typescript";
-import { Constants } from "../constants";
-import '../../dotenv'
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { Constants } from '../constants';
+import '../../dotenv';
 
 export const databaseProviders = [
   {
     provide: Constants.Sequelize,
     useValue: getSequelize(),
-  }
-]
+  },
+];
 
 function getSequelize() {
   const sequelize = new Sequelize(getConnectionConfig());
   const fileExt = __dirname.includes('dist') ? 'js' : 'ts';
   sequelize.addModels([`${__dirname}/../**/*.entity.${fileExt}`]);
-  return sequelize
+  return sequelize;
 }
 
 export function getConnectionConfig(): SequelizeOptions {
@@ -28,7 +28,10 @@ export function getConnectionConfig(): SequelizeOptions {
       // console.log('Sequelize query: ', query)
     },
     modelMatch: (filename, member) => {
-      return filename.substring(0, filename.indexOf('.entity')).replace('-', '') === member.toLowerCase();
-    }
-  }
+      return (
+        filename.substring(0, filename.indexOf('.entity')).replace('-', '') ===
+        member.toLowerCase()
+      );
+    },
+  };
 }

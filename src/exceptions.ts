@@ -1,4 +1,4 @@
-import { BadRequestException, HttpException, HttpStatus } from "@nestjs/common";
+import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
 
 export class InvalidCPF extends BadRequestException {
   constructor() {

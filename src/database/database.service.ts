@@ -1,7 +1,7 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { Sequelize } from "sequelize-typescript";
-import { Constants } from "../constants";
-import { Transaction } from "./transaction";
+import { Inject, Injectable } from '@nestjs/common';
+import { Sequelize } from 'sequelize-typescript';
+import { Constants } from '../constants';
+import { Transaction } from './transaction';
 
 @Injectable()
 export class DatabaseService {

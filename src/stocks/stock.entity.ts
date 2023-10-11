@@ -1,4 +1,12 @@
-import { Column, DataType, Default, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import {
+  Column,
+  DataType,
+  Default,
+  Model,
+  PrimaryKey,
+  Table,
+  Unique,
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'stocks',

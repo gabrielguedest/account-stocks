@@ -1,8 +1,8 @@
-import { Constants } from "../../constants";
-import { CheckingAccount } from "../entities/checking-account.entity";
-import { Inject } from "@nestjs/common";
-import { CheckingAccountModel } from "../models/checking-account.model";
-import { Transaction } from "../../database/transaction";
+import { Constants } from '../../constants';
+import { CheckingAccount } from '../entities/checking-account.entity';
+import { Inject } from '@nestjs/common';
+import { CheckingAccountModel } from '../models/checking-account.model';
+import { Transaction } from '../../database/transaction';
 
 export class CheckingAccountRepository {
   constructor(
@@ -10,17 +10,23 @@ export class CheckingAccountRepository {
     private readonly checkingAccountRepository: typeof CheckingAccount,
   ) {}
 
-  async createCheckingAccount(accountCode: string, transaction?: Transaction): Promise<CheckingAccountModel> {
-    const checkingAccount = await this.checkingAccountRepository.create({
-      code: accountCode,
-    }, { transaction: transaction?.raw });
+  async createCheckingAccount(
+    accountCode: string,
+    transaction?: Transaction,
+  ): Promise<CheckingAccountModel> {
+    const checkingAccount = await this.checkingAccountRepository.create(
+      {
+        code: accountCode,
+      },
+      { transaction: transaction?.raw },
+    );
 
     return {
       code: checkingAccount.code,
       balance: checkingAccount.balance,
       createdAt: checkingAccount.createdAt,
       updatedAt: checkingAccount.updatedAt,
-    }
+    };
   }
 
   async checkIfCodeIsAvailable(accountCode: string): Promise<boolean> {
@@ -31,7 +37,10 @@ export class CheckingAccountRepository {
     return checkingAccount === null;
   }
 
-  async getCheckingAccount(accountCode: string, transaction?: Transaction): Promise<CheckingAccountModel> {
+  async getCheckingAccount(
+    accountCode: string,
+    transaction?: Transaction,
+  ): Promise<CheckingAccountModel> {
     const checkingAccount = await this.checkingAccountRepository.findOne({
       where: { code: accountCode },
       transaction: transaction?.raw,
@@ -42,16 +51,23 @@ export class CheckingAccountRepository {
       balance: checkingAccount.balance,
       createdAt: checkingAccount.createdAt,
       updatedAt: checkingAccount.updatedAt,
-    }
+    };
   }
 
-  async updateBalance(accountCode: string, newBalance: number, transaction?: Transaction) {
-    await this.checkingAccountRepository.update({
-      balance: newBalance,
-    }, {
-      where: { code: accountCode },
-      transaction: transaction?.raw,
-      returning: true,
-    });
+  async updateBalance(
+    accountCode: string,
+    newBalance: number,
+    transaction?: Transaction,
+  ) {
+    await this.checkingAccountRepository.update(
+      {
+        balance: newBalance,
+      },
+      {
+        where: { code: accountCode },
+        transaction: transaction?.raw,
+        returning: true,
+      },
+    );
   }
 }

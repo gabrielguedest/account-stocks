@@ -1,9 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserStocksRepository } from './user-stocks.repository';
-import { CheckingAccountService } from 'src/checking-account/services/checking-account.service';
-import { UserService } from 'src/user/services/user.service';
-import { DatabaseService } from 'src/database/database.service';
-import { StocksService } from 'src/stocks/stocks.service';
+import { CheckingAccountService } from '../checking-account/services/checking-account.service';
+import { UserService } from '../user/services/user.service';
+import { DatabaseService } from '../database/database.service';
+import { StocksService } from '../stocks/stocks.service';
 
 @Injectable()
 export class UserStocksService {
@@ -16,18 +16,20 @@ export class UserStocksService {
   ) {}
 
   async getUserStocks(userId: string) {
-    const userStocks = await this.userStocksRepository.findAllUserStocks(userId);
+    const userStocks = await this.userStocksRepository.findAllUserStocks(
+      userId,
+    );
 
     return {
-      stocks: userStocks.map(userStock => ({
+      stocks: userStocks.map((userStock) => ({
         symbol: userStock.stock.symbol,
         amount: userStock.amount,
         currentPrice: userStock.stock.price,
       })),
       total: userStocks.reduce((acc, userStock) => {
-        return acc + (userStock.amount * userStock.stock.price);
+        return acc + userStock.amount * userStock.stock.price;
       }, 0),
-    }
+    };
   }
 
   async buyStocks(cpf: string, stockSymbol: string, amount: number) {
@@ -40,13 +42,30 @@ export class UserStocksService {
     const transaction = await this.databaseService.transaction();
 
     try {
-      await this.checkingAccountService.withdraw(user.checkingAccount, stock.price * amount, transaction);
-      const userStock = await this.userStocksRepository.findUserStock(user.id, stock.id, transaction);
+      await this.checkingAccountService.withdraw(
+        user.checkingAccount,
+        stock.price * amount,
+        transaction,
+      );
+      const userStock = await this.userStocksRepository.findUserStock(
+        user.id,
+        stock.id,
+        transaction,
+      );
 
       if (userStock) {
-        await this.userStocksRepository.updateStockAmount(userStock.id, userStock.amount + amount, transaction)
+        await this.userStocksRepository.updateStockAmount(
+          userStock.id,
+          userStock.amount + amount,
+          transaction,
+        );
       } else {
-        await this.userStocksRepository.createUserStock(user.id, stock.id, amount, transaction);
+        await this.userStocksRepository.createUserStock(
+          user.id,
+          stock.id,
+          amount,
+          transaction,
+        );
       }
 
       await transaction.commit();

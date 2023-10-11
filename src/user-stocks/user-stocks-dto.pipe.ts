@@ -1,6 +1,6 @@
-import { Injectable, PipeTransform } from "@nestjs/common";
-import { InvalidStockAmount, RequiredInput } from "src/exceptions";
-import { OrderStockDTO } from "./user-stocks.dto";
+import { Injectable, PipeTransform } from '@nestjs/common';
+import { InvalidStockAmount, RequiredInput } from '../exceptions';
+import { OrderStockDTO } from './user-stocks.dto';
 
 @Injectable()
 export class ValidateOrderStockDTO implements PipeTransform {
@@ -8,7 +8,7 @@ export class ValidateOrderStockDTO implements PipeTransform {
     if (!value.symbol) {
       throw new RequiredInput('cpf');
     }
-    
+
     if (!value.amount) {
       throw new RequiredInput('password');
     }
@@ -17,6 +17,6 @@ export class ValidateOrderStockDTO implements PipeTransform {
       throw new InvalidStockAmount();
     }
 
-    return value
+    return value;
   }
 }

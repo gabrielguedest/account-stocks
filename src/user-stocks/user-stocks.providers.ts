@@ -1,9 +1,9 @@
-import { Constants } from "src/constants";
-import { UserStock } from "./user-stock.entity";
+import { Constants } from '../constants';
+import { UserStock } from './user-stock.entity';
 
 export const userStocksProviders = [
   {
     provide: Constants.UserStocksRepository,
     useValue: UserStock,
-  }
-]
+  },
+];

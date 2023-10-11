@@ -1,7 +1,7 @@
-import { Module } from "@nestjs/common";
-import { CheckingAccountService } from "./services/checking-account.service";
-import { CheckingAccountRepository } from "./repositories/checking-account.repository";
-import { checkingAccountProviders } from "./checking-account.providers";
+import { Module } from '@nestjs/common';
+import { CheckingAccountService } from './services/checking-account.service';
+import { CheckingAccountRepository } from './repositories/checking-account.repository';
+import { checkingAccountProviders } from './checking-account.providers';
 
 @Module({
   imports: [],
@@ -10,8 +10,6 @@ import { checkingAccountProviders } from "./checking-account.providers";
     CheckingAccountRepository,
     ...checkingAccountProviders,
   ],
-  exports: [
-    CheckingAccountService,
-  ],
+  exports: [CheckingAccountService],
 })
 export class CheckingAccountModule {}
