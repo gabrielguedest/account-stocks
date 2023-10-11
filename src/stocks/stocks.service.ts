@@ -12,7 +12,7 @@ export class StocksService {
     
     return stocks.map(stock => ({
       symbol: stock.symbol,
-      currentPrice: stock.price,
+      currentPrice: stock.price / 100,
     }));
   }
 

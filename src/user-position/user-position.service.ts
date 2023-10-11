@@ -22,9 +22,12 @@ export class UserPositionService {
     const userStocks = await this.userStocksService.getUserStocks(user.id);
 
     return {
-      checkingAccountAmount: checkingAccount.balance,
-      positions: userStocks.stocks,
-      consolidated: checkingAccount.balance + userStocks.total,
+      checkingAccountAmount: checkingAccount.balance / 100,
+      positions: userStocks.stocks.map(stock => ({
+        ...stock,
+        currentPrice: stock.currentPrice / 100,
+      })),
+      consolidated: (checkingAccount.balance + userStocks.total) / 100,
     }
   }
 }
