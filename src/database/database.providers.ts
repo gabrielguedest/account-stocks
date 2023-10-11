@@ -1,5 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-import { Constants } from '../constants';
+import { Constants } from '../utils/constants';
 import '../../dotenv';
 
 export const databaseProviders = [

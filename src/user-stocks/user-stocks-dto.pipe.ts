@@ -1,5 +1,5 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { InvalidStockAmount, RequiredInput } from '../exceptions';
+import { InvalidStockAmount, RequiredInput } from '../utils/exceptions';
 import { OrderStockDTO } from './user-stocks.dto';
 
 @Injectable()

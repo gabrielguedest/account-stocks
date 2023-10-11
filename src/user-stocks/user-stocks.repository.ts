@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Constants } from '../constants';
+import { Constants } from '../utils/constants';
 import { UserStock } from './user-stock.entity';
 import { Stock } from '../stocks/stock.entity';
 import { Transaction } from '../database/transaction';

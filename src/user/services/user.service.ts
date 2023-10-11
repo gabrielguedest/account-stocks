@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDTO } from '../dtos/user.dto';
 import { DatabaseService } from '../../database/database.service';
 import { UserBaseRepository } from '../repositories/user-base.repository';
-import { UserAlreadyExists } from '../../exceptions';
+import { UserAlreadyExists } from '../../utils/exceptions';
 import { CheckingAccountService } from '../../checking-account/services/checking-account.service';
-import { hashPassword } from '../../utils';
+import { hashPassword } from '../../utils/utils';
 import { JwtAuthService } from '../../jwt-auth/jwt-auth.service';
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { Controller, Post, UseGuards, Req, Body } from '@nestjs/common';
-import { AuthReq } from '../auth-req';
+import { AuthReq } from '../utils/auth-req';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { OrderStockDTO } from './user-stocks.dto';
 import { ValidateOrderStockDTO } from './user-stocks-dto.pipe';

@@ -1,5 +1,5 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { RequiredInput } from '../exceptions';
+import { RequiredInput } from '../utils/exceptions';
 import { AuthLoginDTO } from './auth.dto';
 
 @Injectable()

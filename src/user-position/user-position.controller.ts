@@ -1,7 +1,7 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { UserPositionService } from './user-position.service';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
-import { AuthReq } from '../auth-req';
+import { AuthReq } from '../utils/auth-req';
 
 @Controller('userPosition')
 export class UserPositionController {

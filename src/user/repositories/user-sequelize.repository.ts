@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserParams, UserBaseRepository } from './user-base.repository';
 import { Transaction } from '../../database/transaction';
-import { Constants } from '../../constants';
+import { Constants } from '../../utils/constants';
 import { User } from '../entities/user.entity';
 import { UserModel } from '../models/user.model';
 

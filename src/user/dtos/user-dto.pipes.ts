@@ -1,6 +1,6 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
 import { CreateUserDTO } from './user.dto';
-import { InvalidCPF, RequiredInput } from '../../exceptions';
+import { InvalidCPF, RequiredInput } from '../../utils/exceptions';
 
 @Injectable()
 export class ValidateCreateUserDTO implements PipeTransform {

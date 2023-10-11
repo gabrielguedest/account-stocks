@@ -1,4 +1,4 @@
-import { Constants } from '../../constants';
+import { Constants } from '../../utils/constants';
 import { CheckingAccount } from '../entities/checking-account.entity';
 import { Inject } from '@nestjs/common';
 import { CheckingAccountModel } from '../models/checking-account.model';
