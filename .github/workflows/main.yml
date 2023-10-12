@@ -11,6 +11,21 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@master
 
+      - name: Tests
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+      - run: yarn
+      - run: yarn test
+
+      - name: Tests
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+      - run: yarn
+      - run: yarn db:migrate
+      - run: yarn db:seed
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -43,7 +58,7 @@ jobs:
 
       - name: Generate Deployment Package
         run: zip -r deploy.zip * -x "**node_modules**"
-
+      
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
         with:
