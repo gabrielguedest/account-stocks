@@ -17,6 +17,7 @@ export class CheckingAccountRepository {
     const checkingAccount = await this.checkingAccountRepository.create(
       {
         code: accountCode,
+        balance: 50000,
       },
       { transaction: transaction?.raw },
     );
